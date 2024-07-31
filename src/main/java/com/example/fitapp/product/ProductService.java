@@ -1,10 +1,5 @@
-package com.example.fitapp.service;
+package com.example.fitapp.product;
 
-import com.example.fitapp.dto.ProductDto;
-import com.example.fitapp.mapper.ProductMapper;
-import com.example.fitapp.repository.ProductRepository;
-import com.example.fitapp.utils.Product;
-import com.example.fitapp.utils.ProductType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,7 +31,6 @@ public class ProductService {
     }
 
     public Product addNewProduct(Product product) {
-
         return productRepository.save(product);
     }
 

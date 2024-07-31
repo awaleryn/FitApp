@@ -1,11 +1,7 @@
-package com.example.fitapp.controller;
+package com.example.fitapp.product;
 
-import com.example.fitapp.dto.ProductDto;
 import com.example.fitapp.exception.InvalidProductTypeException;
-import com.example.fitapp.service.ProductService;
-import com.example.fitapp.utils.Product;
-import com.example.fitapp.utils.ProductType;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,15 +9,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/product")
+@RequestMapping("/api/product")
+@RequiredArgsConstructor
 public class ProductController {
 
     private final ProductService productService;
-
-    @Autowired
-    public ProductController(ProductService productService) {
-        this.productService = productService;
-    }
 
     @GetMapping
     ResponseEntity<List<ProductDto>> getListOfProducts() {

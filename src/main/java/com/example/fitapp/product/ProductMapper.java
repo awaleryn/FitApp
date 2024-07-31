@@ -1,7 +1,5 @@
-package com.example.fitapp.mapper;
+package com.example.fitapp.product;
 
-import com.example.fitapp.dto.ProductDto;
-import com.example.fitapp.utils.Product;
 import org.mapstruct.Mapper;
 
 import java.util.List;

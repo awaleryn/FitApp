@@ -1,7 +1,5 @@
-package com.example.fitapp.repository;
+package com.example.fitapp.product;
 
-import com.example.fitapp.utils.Product;
-import com.example.fitapp.utils.ProductType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

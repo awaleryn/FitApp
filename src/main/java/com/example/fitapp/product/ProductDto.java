@@ -1,6 +1,5 @@
-package com.example.fitapp.dto;
+package com.example.fitapp.product;
 
-import com.example.fitapp.utils.ProductType;
 import lombok.Value;
 
 @Value

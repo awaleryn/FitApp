@@ -1,4 +1,4 @@
-package com.example.fitapp.utils;
+package com.example.fitapp.product;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

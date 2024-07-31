@@ -15,4 +15,28 @@ public class GlobalExceptionHandler {
                 HttpStatus.BAD_REQUEST
         );
     }
+
+    @ExceptionHandler(WrongPasswordException.class)
+    public ResponseEntity<String> handleWrongPasswordException(WrongPasswordException ex) {
+        return new ResponseEntity<>(
+                ex.getMessage(),
+                HttpStatus.BAD_REQUEST
+        );
+    }
+
+    @ExceptionHandler(PasswordsNotMatchingException.class)
+    public ResponseEntity<String> handlePasswordsNotMatchingException(PasswordsNotMatchingException ex) {
+        return new ResponseEntity<>(
+                ex.getMessage(),
+                HttpStatus.EXPECTATION_FAILED
+        );
+    }
+
+    @ExceptionHandler(WrongLogoutTokenException.class)
+    public ResponseEntity<String> handleWrongLogoutTokenException(WrongLogoutTokenException ex) {
+        return new ResponseEntity<>(
+                ex.getMessage(),
+                HttpStatus.BAD_REQUEST
+        );
+    }
 }

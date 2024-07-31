@@ -1,4 +1,4 @@
-package com.example.fitapp.utils;
+package com.example.fitapp.product;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -15,19 +15,26 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
 
+    @Column(nullable = false)
     private String productName;
 
+    @Column(nullable = false)
     private String productBrand;
 
+    @Column(nullable = false)
     private double calories;
 
+    @Column(nullable = false)
     private double protein;
 
+    @Column(nullable = false)
     private double fat;
 
+    @Column(nullable = false)
     private double carbohydrates;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private ProductType productType;
 
 }
