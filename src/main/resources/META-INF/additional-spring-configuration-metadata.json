@@ -1,0 +1,18 @@
+{
+  "properties": [
+    {
+      "name": "security.jwt.secret-key",
+      "type": "java.lang.String",
+      "description": "Secret Key."
+    },
+    {
+      "name": "security.jwt.expiration",
+      "type": "java.lang.Long",
+      "description": "Jwt tokens expiration is set to 1 day."
+    },
+    {
+      "name": "security.jwt.refresh-token-expiration",
+      "type": "java.lang.Long",
+      "description": "Jwt refresh token expiration set to 7 days."
+    }
+  ] }

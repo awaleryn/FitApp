@@ -39,4 +39,20 @@ public class GlobalExceptionHandler {
                 HttpStatus.BAD_REQUEST
         );
     }
+
+    @ExceptionHandler(UserDoesNotExistException.class)
+    public ResponseEntity<String> handleUserDoesNotExistException(UserDoesNotExistException ex) {
+        return new ResponseEntity<>(
+                ex.getMessage(),
+                HttpStatus.BAD_REQUEST
+        );
+    }
+
+    @ExceptionHandler(UserAlreadyLoggedException.class)
+    public ResponseEntity<String> handleUserAlreadyLoggedException(UserAlreadyLoggedException ex) {
+        return new ResponseEntity<>(
+                ex.getMessage(),
+                HttpStatus.BAD_REQUEST
+        );
+    }
 }

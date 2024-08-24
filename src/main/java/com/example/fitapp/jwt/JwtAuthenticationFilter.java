@@ -1,5 +1,6 @@
 package com.example.fitapp.jwt;
 
+import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static com.example.fitapp.utils.Constants.*;
 
 import com.example.fitapp.token.TokenRepository;
