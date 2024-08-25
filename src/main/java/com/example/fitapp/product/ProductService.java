@@ -1,40 +1,44 @@
 package com.example.fitapp.product;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.fitapp.gpt.ChatGptServiceHelper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
+import static com.example.fitapp.utils.Constants.PRODUCT_RECOMMENDATION;
 
 @Service
 public class ProductService {
 
     private final ProductRepository productRepository;
     private final ProductMapper productMapper;
+    private final ChatGptServiceHelper chatGptServiceHelper;
 
-    @Autowired
-    public ProductService(
-            ProductRepository productRepository,
-            ProductMapper productMapper
-    ) {
+    public ProductService(ProductRepository productRepository, ProductMapper productMapper, ChatGptServiceHelper chatGptServiceHelper) {
         this.productRepository = productRepository;
         this.productMapper = productMapper;
+        this.chatGptServiceHelper = chatGptServiceHelper;
     }
 
-    public List<ProductDto> getProductList() {
+    protected List<ProductDto> getProductList() {
         List<Product> productList = productRepository.findAll();
         return productMapper.toDto(productList);
     }
 
-    public List<ProductDto> getProductListBasedOnType(ProductType productType) {
+    protected List<ProductDto> getProductListBasedOnType(ProductType productType) {
         List<Product> productList = productRepository.findAllByProductType(productType);
         return productMapper.toDto(productList);
     }
 
-    public Product addNewProduct(Product product) {
+    protected Product addNewProduct(Product product) {
         return productRepository.save(product);
     }
 
-    public List<Product> addNewProductsList(List<Product> productList) {
+    protected List<Product> addNewProductsList(List<Product> productList) {
         return productRepository.saveAll(productList);
+    }
+
+    protected String getProductRecommendation() {
+        return chatGptServiceHelper.getChatGptResponse(PRODUCT_RECOMMENDATION);
     }
 }

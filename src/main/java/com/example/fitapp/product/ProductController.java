@@ -51,4 +51,12 @@ public class ProductController {
                 HttpStatus.CREATED
         );
     }
+
+    @GetMapping("/recommend")
+    ResponseEntity<String> getProductRecommendation() {
+        return new ResponseEntity<>(
+                productService.getProductRecommendation(),
+                HttpStatus.OK
+        );
+    }
 }
