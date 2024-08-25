@@ -1,8 +1,10 @@
 package com.example.fitapp.user;
 
+import com.example.fitapp.calories.bmi.BmiCategory;
 import com.example.fitapp.token.Token;
 import com.example.fitapp.utils.Role;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,12 +28,16 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @NotNull
     private String firstName;
 
+    @NotNull
     private String lastName;
 
+    @NotNull
     private String email;
 
+    @NotNull
     private String password;
 
     @Enumerated(EnumType.STRING)
@@ -39,6 +45,18 @@ public class User implements UserDetails {
 
     @OneToMany(mappedBy = "user")
     private List<Token> tokens;
+
+    private double dailyCaloricNeeds;
+
+    private double proteinNeeds;
+
+    private double fatNeeds;
+
+    private double carbNeeds;
+
+    private double bmi;
+
+    private BmiCategory category;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -55,4 +55,12 @@ public class GlobalExceptionHandler {
                 HttpStatus.BAD_REQUEST
         );
     }
+
+    @ExceptionHandler(UserAlreadyExistsException.class)
+    public ResponseEntity<String> handleUserAlreadyExistsException(UserAlreadyExistsException ex) {
+        return new ResponseEntity<>(
+                ex.getMessage(),
+                HttpStatus.BAD_REQUEST
+        );
+    }
 }

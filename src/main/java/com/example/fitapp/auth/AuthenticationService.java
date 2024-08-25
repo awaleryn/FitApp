@@ -1,5 +1,6 @@
 package com.example.fitapp.auth;
 
+import com.example.fitapp.exception.UserAlreadyExistsException;
 import com.example.fitapp.exception.UserAlreadyLoggedException;
 import com.example.fitapp.exception.UserDoesNotExistException;
 import com.example.fitapp.exception.WrongPasswordException;
@@ -39,6 +40,12 @@ public class AuthenticationService {
     private final JwtService jwtService;
 
     public AuthenticationResponse register(RegisterRequest request) {
+
+        Optional<User> optionalUser = userRepository.findByEmail(request.getEmail());
+        if (optionalUser.isPresent()) {
+            throw new UserAlreadyExistsException("User already exists. Try again with different username");
+        }
+
         var user = User.builder()
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())
