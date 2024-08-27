@@ -1,9 +1,12 @@
 package com.example.fitapp.product;
 
+import com.example.fitapp.exception.ProductAlreadyExistsException;
 import com.example.fitapp.gpt.ChatGptServiceHelper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static com.example.fitapp.utils.Constants.PRODUCT_RECOMMENDATION;
 
@@ -31,10 +34,26 @@ public class ProductService {
     }
 
     protected Product addNewProduct(Product product) {
+        if (productRepository.findByProductNameIgnoreCase(product.getProductName()).isPresent()) {
+            throw new ProductAlreadyExistsException("Product already exists.");
+        }
+
         return productRepository.save(product);
     }
 
     protected List<Product> addNewProductsList(List<Product> productList) {
+        List<String> newProductNames = productList.stream()
+                .map(Product::getProductName)
+                .toList();
+
+        boolean hasDuplicates = newProductNames.stream()
+                .anyMatch(productName -> productRepository.findByProductNameIgnoreCase(productName)
+                        .isPresent());
+
+        if (hasDuplicates) {
+            throw new ProductAlreadyExistsException("One or more products already exist.");
+        }
+
         return productRepository.saveAll(productList);
     }
 

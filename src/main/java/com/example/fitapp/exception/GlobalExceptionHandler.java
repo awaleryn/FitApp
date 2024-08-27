@@ -20,7 +20,8 @@ public class GlobalExceptionHandler {
             UserDoesNotExistException.class,
             UserAlreadyLoggedException.class,
             UserAlreadyExistsException.class,
-            DailyNeedsNotAssignedException.class
+            DailyNeedsNotAssignedException.class,
+            ProductAlreadyExistsException.class
     })
     public ResponseEntity<ErrorResponse> handleCustomExceptions(RuntimeException ex) {
         HttpStatus status = HttpStatus.BAD_REQUEST;

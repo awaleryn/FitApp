@@ -1,7 +1,6 @@
 package com.example.fitapp.intake;
 
 import com.example.fitapp.exception.DailyNeedsNotAssignedException;
-import com.example.fitapp.jwt.JwtAuthenticationFilter;
 import com.example.fitapp.product.Product;
 import com.example.fitapp.user.User;
 import jakarta.transaction.Transactional;
