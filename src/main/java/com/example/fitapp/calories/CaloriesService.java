@@ -3,6 +3,7 @@ package com.example.fitapp.calories;
 import com.example.fitapp.calories.bmi.BmiCalculator;
 import com.example.fitapp.calories.bmr.BmrCalculator;
 import com.example.fitapp.user.User;
+import com.example.fitapp.user.UserRepository;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
 
@@ -14,16 +15,18 @@ public class CaloriesService {
     private final CaloriesMapper caloriesMapper;
     private final BmrCalculator bmrCalculator;
     private final BmiCalculator bmiCalculator;
+    private final UserRepository userRepository;
 
 
     public CaloriesService(
             CaloriesMapper caloriesMapper,
             BmrCalculator bmrCalculator,
-            BmiCalculator bmiCalculator
-    ) {
+            BmiCalculator bmiCalculator,
+            UserRepository userRepository) {
         this.caloriesMapper = caloriesMapper;
         this.bmrCalculator = bmrCalculator;
         this.bmiCalculator = bmiCalculator;
+        this.userRepository = userRepository;
     }
 
     protected void calculateMacros(double caloricNeeds, User user) {
@@ -68,6 +71,8 @@ public class CaloriesService {
         double bmi = roundToTwoDecimalPlaces(bmiCalculator.calculateBmi(weight, height));
         user.setBmi(bmi);
         user.setCategory(bmiCalculator.getBmiCategory(bmi));
+
+        userRepository.save(user);
         return caloriesMapper.toDto(user);
     }
 

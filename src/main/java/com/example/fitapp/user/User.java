@@ -1,14 +1,12 @@
 package com.example.fitapp.user;
 
 import com.example.fitapp.calories.bmi.BmiCategory;
+import com.example.fitapp.intake.DailyIntake;
 import com.example.fitapp.token.Token;
 import com.example.fitapp.utils.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -44,17 +42,22 @@ public class User implements UserDetails {
     private Role role;
 
     @OneToMany(mappedBy = "user")
+    @ToString.Exclude
     private List<Token> tokens;
 
-    private double dailyCaloricNeeds;
+    @OneToMany(mappedBy = "user")
+    @ToString.Exclude
+    private List<DailyIntake> dailyIntakes;
 
-    private double proteinNeeds;
+    private Double dailyCaloricNeeds;
 
-    private double fatNeeds;
+    private Double proteinNeeds;
 
-    private double carbNeeds;
+    private Double fatNeeds;
 
-    private double bmi;
+    private Double carbNeeds;
+
+    private Double bmi;
 
     private BmiCategory category;
 

@@ -6,9 +6,4 @@ public class InvalidProductTypeException extends RuntimeException  {
         super(errorMessage);
     }
 
-    public InvalidProductTypeException(String errorMessage, Throwable cause) {
-        super(errorMessage, cause);
-    }
-
-
 }
