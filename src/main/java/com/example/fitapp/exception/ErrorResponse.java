@@ -8,9 +8,9 @@ import java.time.LocalDateTime;
 @Getter
 public class ErrorResponse {
 
-    private String message;
-    private HttpStatus status;
-    private LocalDateTime timestamp;
+    private final String message;
+    private final HttpStatus status;
+    private final LocalDateTime timestamp;
 
     public ErrorResponse(String message, HttpStatus status) {
         this.message = message;
