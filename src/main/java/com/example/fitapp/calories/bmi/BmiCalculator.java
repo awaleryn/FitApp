@@ -3,6 +3,7 @@ package com.example.fitapp.calories.bmi;
 import org.springframework.stereotype.Component;
 
 import static com.example.fitapp.calories.bmi.BmiCategory.*;
+import static com.example.fitapp.utils.MathUtils.*;
 
 @Component
 public class BmiCalculator {
@@ -10,7 +11,7 @@ public class BmiCalculator {
 
     public double calculateBmi(double weight, double height) {
         double heightM = height / 100;
-        return weight / (heightM * heightM);
+        return roundToTwoDecimalPlaces(weight / (heightM * heightM));
     }
 
 

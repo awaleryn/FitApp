@@ -31,12 +31,13 @@ public class ProductService {
         return productMapper.toDto(productList);
     }
 
-    protected Product addNewProduct(Product product) {
+    protected ProductDto addNewProduct(Product product) {
         if (productRepository.findByProductNameIgnoreCase(product.getProductName()).isPresent()) {
             throw new ProductAlreadyExistsException("Product already exists.");
         }
+        productRepository.save(product);
 
-        return productRepository.save(product);
+        return productMapper.toDto(product);
     }
 
     protected List<Product> addNewProductsList(List<Product> productList) {

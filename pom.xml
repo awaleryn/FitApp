@@ -6,7 +6,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.3.2</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath/>
     </parent>
     <groupId>com.example</groupId>
     <artifactId>FitApp</artifactId>
@@ -34,9 +34,7 @@
         <lombok.version>1.18.34</lombok.version>
         <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
         <spring-security.version>6.3.1</spring-security.version>
-        <spring-boot-starter-validation.version>3.3.2</spring-boot-starter-validation.version>
-        <spring-boot-starter-security.version>3.3.2</spring-boot-starter-security.version>
-        <spring-boot-configuration-processor.version>3.3.2</spring-boot-configuration-processor.version>
+        <spring-boot.version>3.3.2</spring-boot.version>
         <jjwt.version>0.11.5</jjwt.version>
     </properties>
 
@@ -106,17 +104,17 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
-            <version>${spring-boot-starter-validation.version}</version>
+            <version>${spring-boot.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
-            <version>${spring-boot-starter-security.version}</version>
+            <version>${spring-boot.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
-            <version>${spring-boot-configuration-processor.version}</version>
+            <version>${spring-boot.version}</version>
         </dependency>
         <dependency>
             <groupId>com.theokanning.openai-gpt3-java</groupId>

@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import java.security.Principal;
 
+import static com.example.fitapp.utils.MathUtils.*;
+
 @Service
 public class CaloriesService {
 
@@ -76,7 +78,4 @@ public class CaloriesService {
         return caloriesMapper.toDto(user);
     }
 
-    private double roundToTwoDecimalPlaces(double value) {
-        return Math.round(value * 100.0) / 100.0;
-    }
 }
