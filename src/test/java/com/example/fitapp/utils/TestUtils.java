@@ -1,7 +1,6 @@
 package com.example.fitapp.utils;
 
 import com.example.fitapp.product.Product;
-import org.springframework.test.web.servlet.MvcResult;
 
 import static com.example.fitapp.product.ProductType.BEVERAGE;
 import static org.junit.jupiter.api.Assertions.assertEquals;

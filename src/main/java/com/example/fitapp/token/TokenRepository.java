@@ -16,5 +16,9 @@ where u.id = :userId and (t.expired = false or t.revoked = false)
 """)
     List<Token> findAllValidTokensByUser(Integer userId);
 
+    @Query("""
+    select t from Token t
+    where t.token = :token and t.expired = false and t.revoked = false
+""")
     Optional<Token> findByToken(String token);
 }
