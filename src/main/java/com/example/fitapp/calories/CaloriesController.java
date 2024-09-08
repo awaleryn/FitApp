@@ -31,7 +31,7 @@ public class CaloriesController {
                         weightInKg,
                         heightInCm,
                         ageInYears,
-                        gender.getType(),
+                        gender,
                         activityLevel,
                         goal,
                         connectedUser),

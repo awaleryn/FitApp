@@ -31,7 +31,7 @@ public class CaloriesService {
         this.userRepository = userRepository;
     }
 
-    protected void calculateMacros(double caloricNeeds, User user) {
+    private void calculateMacros(double caloricNeeds, User user) {
         user.setCarbNeeds(roundToTwoDecimalPlaces((0.4 * caloricNeeds) / 4));
         user.setProteinNeeds(roundToTwoDecimalPlaces((0.35 * caloricNeeds) / 4));
         user.setFatNeeds(roundToTwoDecimalPlaces((0.25 * caloricNeeds) / 9));
@@ -49,11 +49,11 @@ public class CaloriesService {
      * @param goal (LOSE_WEIGHT/MAINTAIN/GAIN_WEIGHT)
      * @return CaloriesDto
      */
-    protected CaloriesDto updateNutritionNeeds(
+    public CaloriesDto updateNutritionNeeds(
             double weight,
             double height,
             int age,
-            String gender,
+            Gender gender,
             ActivityLevel activityLevel,
             Goal goal,
             Principal connectedUser

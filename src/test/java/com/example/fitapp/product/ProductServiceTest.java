@@ -1,20 +1,22 @@
 package com.example.fitapp.product;
 
 import com.example.fitapp.exception.ProductAlreadyExistsException;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
 import static com.example.fitapp.product.ProductType.*;
+import static com.example.fitapp.utils.TestUtils.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+@ExtendWith(MockitoExtension.class)
 class ProductServiceTest {
 
     @InjectMocks
@@ -26,35 +28,8 @@ class ProductServiceTest {
     @Mock
     private ProductMapper productMapper;
 
-    private final static int ONE_TIME = 1;
-    private Product product;
-    private Product product2;
-
-    @BeforeEach
-    void setUp() {
-        MockitoAnnotations.openMocks(this);
-        product = new Product(
-                null,
-                "Pepsi",
-                "PepsiCo",
-                28,
-                0,
-                0,
-                7,
-                BEVERAGE
-        );
-
-        product2 = new Product(
-                null,
-                "Dr pepper",
-                "Orangina Schweppes",
-                17,
-                0,
-                0,
-                4.3,
-                BEVERAGE
-        );
-    }
+    private final Product product = createProductPepsi();
+    private final Product product2 = createProductDrPepper();
 
 
     @Test

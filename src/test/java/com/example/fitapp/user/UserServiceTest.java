@@ -12,6 +12,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import java.security.Principal;
 
+import static com.example.fitapp.utils.TestUtils.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -80,13 +81,12 @@ class UserServiceTest {
 
         when(passwordEncoder.matches(request.getCurrentPassword(), user.getPassword()))
                 .thenReturn(true);
-
         when(passwordEncoder.encode(request.getNewPassword()))
                 .thenReturn("encodedNewPassword");
 
         userService.changePassword(request, principal);
 
-        verify(userRepository, times(1)).save(user);
+        verify(userRepository, times(ONE_TIME)).save(user);
         assertEquals("encodedNewPassword", user.getPassword());
     }
 }

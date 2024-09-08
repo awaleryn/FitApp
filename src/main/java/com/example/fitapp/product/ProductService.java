@@ -31,7 +31,7 @@ public class ProductService {
         return productMapper.toDto(productList);
     }
 
-    protected ProductDto addNewProduct(Product product) {
+    public ProductDto addNewProduct(Product product) {
         if (productRepository.findByProductNameIgnoreCase(product.getProductName()).isPresent()) {
             throw new ProductAlreadyExistsException("Product already exists.");
         }

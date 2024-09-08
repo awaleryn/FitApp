@@ -1,6 +1,7 @@
 package com.example.fitapp.calories.bmr;
 
 import com.example.fitapp.calories.ActivityLevel;
+import com.example.fitapp.calories.Gender;
 import org.springframework.stereotype.Component;
 
 import static com.example.fitapp.calories.Gender.*;
@@ -18,10 +19,10 @@ public class BmrCalculator {
      * @param gender (male/female)
      * @return BMR
      */
-    public double calculateBmr(double weight, double height, int age, String gender) {
-        if (gender.equalsIgnoreCase(MALE.getType())) {
+    public double calculateBmr(double weight, double height, int age, Gender gender) {
+        if (gender.name().equalsIgnoreCase(MALE.getType())) {
             return (10 * weight) + (6.25 * height) - (5 * age) + 5;
-        } else if (gender.equalsIgnoreCase(FEMALE.getType())) {
+        } else if (gender.name().equalsIgnoreCase(FEMALE.getType())) {
             return (10 * weight) + (6.25 * height) - (5 * age) - 16;
         } else {
             throw new IllegalArgumentException("Invalid gender: " + gender);
