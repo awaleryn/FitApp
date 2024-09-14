@@ -1,5 +1,6 @@
 package com.example.fitapp.password;
 
+import com.example.fitapp.exception.UserDoesNotExistException;
 import com.example.fitapp.user.User;
 import com.example.fitapp.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,21 +29,20 @@ public class PasswordResetService {
     }
 
     public void initiatePasswordReset(String email) {
-        Optional<User> userOptional = userRepository.findByEmail(email);
-        if (userOptional.isPresent()) {
-            User user = userOptional.get();
-            String newPassword = PasswordRandomGenerator.generateRandomPassword();
+        Optional<User> optionalUser = userRepository.findByEmail(email);
+        var user = optionalUser.orElseThrow(
+                () -> new UserDoesNotExistException("User with this login doesn't exist!"));
 
-            user.setPassword(passwordEncoder.encode(newPassword));
-            userRepository.save(user);
+        String newPassword = PasswordRandomGenerator.generateRandomPassword();
+        user.setPassword(passwordEncoder.encode(newPassword));
+        userRepository.save(user);
 
-            SimpleMailMessage message = new SimpleMailMessage();
-            message.setTo(user.getEmail());
-            message.setSubject("Password Reset Request");
-            message.setText("Your new password is: " + newPassword + "\nPlease change it after logging in.");
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(user.getEmail());
+        message.setSubject("Password Reset Request");
+        message.setText("Your new password is: " + newPassword + "\nPlease change it after logging in.");
 
-            mailSender.send(message);
-        }
+        mailSender.send(message);
     }
 
 }
