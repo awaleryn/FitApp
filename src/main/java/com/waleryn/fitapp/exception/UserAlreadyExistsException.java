@@ -1,0 +1,8 @@
+package com.waleryn.fitapp.exception;
+
+public class UserAlreadyExistsException extends RuntimeException {
+
+    public UserAlreadyExistsException(String message) {
+        super(message);
+    }
+}
