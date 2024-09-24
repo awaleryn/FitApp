@@ -40,7 +40,7 @@ public class ProductService {
         return productMapper.toDto(product);
     }
 
-    protected List<Product> addNewProductsList(List<Product> productList) {
+    protected List<ProductDto> addNewProductsList(List<Product> productList) {
         List<String> newProductNames = productList.stream()
                 .map(Product::getProductName)
                 .toList();
@@ -53,7 +53,9 @@ public class ProductService {
             throw new ProductAlreadyExistsException("One or more products already exist.");
         }
 
-        return productRepository.saveAll(productList);
+        productRepository.saveAll(productList);
+
+        return productMapper.toDto(productList);
     }
 
     protected String getProductRecommendation() {

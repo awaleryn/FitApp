@@ -106,9 +106,10 @@ class ProductServiceTest {
         when(productRepository.saveAll(productList)).thenReturn(productList);
 
 
-        List<Product> savedProducts = productService.addNewProductsList(productList);
+        List<ProductDto> savedProducts = productService.addNewProductsList(productList);
+        List<ProductDto> productDtoList = productMapper.toDto(productList);
 
-        assertEquals(productList.size(), savedProducts.size());
+        assertEquals(productDtoList.size(), savedProducts.size());
         verify(productRepository, times(ONE_TIME)).findByProductNameIgnoreCase(product.getProductName());
         verify(productRepository, times(ONE_TIME)).findByProductNameIgnoreCase(product2.getProductName());
         verify(productRepository, times(ONE_TIME)).saveAll(productList);

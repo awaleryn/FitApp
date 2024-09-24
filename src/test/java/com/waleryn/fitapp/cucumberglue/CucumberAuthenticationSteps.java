@@ -41,7 +41,7 @@ public class CucumberAuthenticationSteps {
 
         String requestBody = objectMapper.writeValueAsString(registerRequest);
 
-        result = mockMvc.perform(post("/api/auth/register")
+        result = mockMvc.perform(post("/api/v1/auth/register")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(requestBody))
                 .andExpect(status().isOk())
@@ -56,7 +56,7 @@ public class CucumberAuthenticationSteps {
 
         String requestBody = objectMapper.writeValueAsString(loginRequest);
 
-        result = mockMvc.perform(post("/api/auth/login")
+        result = mockMvc.perform(post("/api/v1/auth/login")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(requestBody))
                 .andReturn();
@@ -70,7 +70,7 @@ public class CucumberAuthenticationSteps {
 
         String requestBody = objectMapper.writeValueAsString(authenticationRequest);
 
-        result = mockMvc.perform(post("/api/auth/authenticate")
+        result = mockMvc.perform(post("/api/v1/auth/authenticate")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(requestBody))
                 .andReturn();
@@ -81,7 +81,7 @@ public class CucumberAuthenticationSteps {
     @When("the user logs out")
     public void theUserIsAbleToLoginWith() throws Exception {
 
-        result = mockMvc.perform(post("/api/logout")
+        result = mockMvc.perform(post("/api/v1/logout")
                         .header("Authorization", "Bearer " + jwtToken))
                 .andReturn();
         cucumberCommonStep.setResult(result);
@@ -90,7 +90,7 @@ public class CucumberAuthenticationSteps {
     @When("the user wants to refresh token")
     public void theUserIsAbleToRefreshToken() throws Exception {
 
-        result = mockMvc.perform(post("/api/auth/refresh-token")
+        result = mockMvc.perform(post("/api/v1/auth/refresh-token")
                         .header("Authorization", "Bearer " + jwtToken))
                 .andReturn();
         cucumberCommonStep.setResult(result);

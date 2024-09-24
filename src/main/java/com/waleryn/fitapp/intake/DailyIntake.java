@@ -41,14 +41,6 @@ public class DailyIntake {
     @Column(nullable = false)
     private double totalCarbohydrates = 0;
 
-    private String caloriesToday;
-
-    private String proteinToday;
-
-    private String fatToday;
-
-    private String carbohydratesToday;
-
     public DailyIntake(User user, LocalDate date) {
         this.user = user;
         this.date = date;

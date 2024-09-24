@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.security.Principal;
 
 @RestController
-@RequestMapping("/api/calories")
+@RequestMapping("/api/v1/calories")
 @RequiredArgsConstructor
 public class CaloriesController {
 

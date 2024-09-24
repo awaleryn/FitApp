@@ -25,16 +25,16 @@ public class SecurityConfiguration {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/**").permitAll()
-                        .requestMatchers("api/password/**").permitAll()
-                        .anyRequest().authenticated() // All other endpoints require authentication
+                        .requestMatchers("/api/v1/auth/**").permitAll()
+                        .requestMatchers("api/v1/password/**").permitAll()
+                        .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .logout(logout -> logout
-                        .logoutUrl("/api/logout")
+                        .logoutUrl("/api/v1/logout")
                         .addLogoutHandler(logoutHandler)
                         .logoutSuccessHandler(
                                 (request, response, authentication) ->

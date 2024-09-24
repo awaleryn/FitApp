@@ -11,7 +11,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/intake")
+@RequestMapping("/api/v1/intake")
 public class DailyIntakeController {
 
     private final DailyIntakeService dailyIntakeService;
@@ -43,11 +43,11 @@ public class DailyIntakeController {
     }
 
     @GetMapping("/history")
-    public List<DailyIntake> getDailyIntakeHistory(Principal principal) {
+    public List<DailyIntakeDto> getDailyIntakeHistory(Principal principal) {
         User user = userRepository.findByEmail(principal.getName())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        return dailyIntakeService.getDailyIntakeHistory(user);
+        return dailyIntakeService.getDailyIntakeHistory(user);///api/intake/history/2024-08-27.
     }
 
     @GetMapping("/history/{date}")

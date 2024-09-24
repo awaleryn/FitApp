@@ -5,6 +5,8 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.mapstruct.factory.Mappers;
 
+import java.util.List;
+
 @Mapper
 public interface DailyIntakeMapper {
 
@@ -17,6 +19,8 @@ public interface DailyIntakeMapper {
             @Mapping(target = "carbohydratesToday", expression = "java(calculateDaily(dailyIntake.getTotalCarbohydrates(), dailyIntake.getUser().getCarbNeeds()))")
     })
     DailyIntakeDto toDto(DailyIntake dailyIntake);
+
+    List<DailyIntakeDto> toDto(List<DailyIntake> dailyIntakeList);
 
 
     default String calculateDaily(double consumed, double need) {

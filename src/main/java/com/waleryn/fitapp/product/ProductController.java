@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/product")
+@RequestMapping("/api/v1/product")
 @RequiredArgsConstructor
 public class ProductController {
 
@@ -45,7 +45,7 @@ public class ProductController {
     }
 
     @PostMapping("/list")
-    ResponseEntity<List<Product>> addProductsListToDatabase(@RequestBody List<Product> productList) {
+    ResponseEntity<List<ProductDto>> addProductsListToDatabase(@RequestBody List<Product> productList) {
         return new ResponseEntity<>(
                 productService.addNewProductsList(productList),
                 HttpStatus.CREATED

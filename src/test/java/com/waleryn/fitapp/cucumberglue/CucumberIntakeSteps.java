@@ -57,7 +57,7 @@ public class CucumberIntakeSteps {
     @And("adds new product to daily intake with {string} product name")
     public void theUserAddsProductToDailyIntake(String productName) throws Exception {
 
-        result = mockMvc.perform(post("/api/intake/add")
+        result = mockMvc.perform(post("/api/v1/intake/add")
                         .param("productName", productName)
                         .principal(principal)
                         .header("Authorization", "Bearer " + jwtToken))

@@ -47,7 +47,7 @@ public class CucumberCaloriesSteps {
 
     @When("the user requests nutrition needs for weight {double} kg, height {double} cm, age {int} years, gender {gender}, activity level {activityLevel}, and goal {goal}")
     public void theUserRequestsNutritionNeeds(double weight, double height, int age, Gender gender, ActivityLevel activityLevel, Goal goal) throws Exception {
-        result = mockMvc.perform(get("/api/calories/nutrition")
+        result = mockMvc.perform(get("/api/v1/calories/nutrition")
                         .param("weightInKg", String.valueOf(weight))
                         .param("heightInCm", String.valueOf(height))
                         .param("ageInYears", String.valueOf(age))
@@ -68,7 +68,7 @@ public class CucumberCaloriesSteps {
 
     @When("the user requests nutrition needs for weight {double} kg, height {double} cm, age {int} years, gender {gender}, activity level {activityLevel}, and goal {goal} without authorization")
     public void theUserRequestsNutritionNeedsWithoutAuthorization(double weight, double height, int age, Gender gender, ActivityLevel activityLevel, Goal goal) throws Exception {
-        result = mockMvc.perform(get("/api/calories/nutrition")
+        result = mockMvc.perform(get("/api/v1/calories/nutrition")
                         .param("weightInKg", String.valueOf(weight))
                         .param("heightInCm", String.valueOf(height))
                         .param("ageInYears", String.valueOf(age))

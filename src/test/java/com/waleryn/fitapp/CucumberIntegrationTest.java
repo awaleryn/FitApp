@@ -6,7 +6,7 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(features = "classpath:features/",
-        glue = { "com.example.fitapp.cucumberglue" })
+        glue = { "com.waleryn.fitapp.cucumberglue" })
 public class CucumberIntegrationTest {
 
 }

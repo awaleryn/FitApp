@@ -52,8 +52,9 @@ public class DailyIntakeService {
         return dailyIntakeMapper.toDto(dailyIntake);
     }
 
-    public List<DailyIntake> getDailyIntakeHistory(User user) {
-        return dailyIntakeRepository.findByUserOrderByDateDesc(user);
+    public List<DailyIntakeDto> getDailyIntakeHistory(User user) {
+        List<DailyIntake> dailyIntakes = dailyIntakeRepository.findByUserOrderByDateDesc(user);
+        return dailyIntakeMapper.toDto(dailyIntakes);
     }
 
     public DailyIntakeDto getDailyIntakeForDate(User user, LocalDate date) {
