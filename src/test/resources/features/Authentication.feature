@@ -5,6 +5,9 @@ Feature: Authentication/registration of user
     Given a user with the first name "registerNameTest", last name "registerLastNameTest", email "registerTest@gmail.com", and password "registerTestPassword" registers successfully
     Then the response status should be 200
 
+    When the user tries to authenticate with email "registerTest@gmail.com" and password "registerTestPassword"
+    Then the response status should be 200
+
     When the user tries to log in with email "registerTest@gmail.com" and password "registerTestPassword"
     Then the response status should be 400
 
@@ -12,9 +15,6 @@ Feature: Authentication/registration of user
     Then the response status should be 200
 
     When the user tries to log in with email "registerTest@gmail.com" and password "registerTestPassword"
-    Then the response status should be 200
-
-    When the user tries to authenticate with email "registerTest@gmail.com" and password "registerTestPassword"
     Then the response status should be 200
 
     When the user wants to refresh token

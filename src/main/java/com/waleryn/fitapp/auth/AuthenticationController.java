@@ -1,5 +1,6 @@
 package com.waleryn.fitapp.auth;
 
+import com.waleryn.fitapp.user.UserDto;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +22,7 @@ public class AuthenticationController {
     private final AuthenticationService authService;
 
     @PostMapping("/register")
-    public ResponseEntity<AuthenticationResponse> register (
+    public ResponseEntity<UserDto> register (
             @RequestBody RegisterRequest request) {
         return ResponseEntity.ok(authService.register(request));
     }

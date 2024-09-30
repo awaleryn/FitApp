@@ -4,6 +4,8 @@ import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 
 import com.waleryn.fitapp.exception.WrongLogoutTokenException;
 import com.waleryn.fitapp.token.TokenRepository;
+import com.waleryn.fitapp.user.User;
+import com.waleryn.fitapp.user.UserRepository;
 import com.waleryn.fitapp.utils.Constants;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -18,6 +20,7 @@ import org.springframework.stereotype.Service;
 public class LogoutService implements LogoutHandler {
 
     private final TokenRepository tokenRepository;
+    private final UserRepository userRepository;
 
     @Override
     public void logout(
@@ -32,13 +35,15 @@ public class LogoutService implements LogoutHandler {
         jwt = authHeader.substring(Constants.BEARER_TOKEN);
         var storedToken = tokenRepository.findByToken(jwt)
                 .orElse(null);
-
         if (storedToken != null
                 && !storedToken.isRevoked()
                 && !storedToken.isExpired()) {
+            User user = tokenRepository.findUserByToken(storedToken.getToken());
             storedToken.setExpired(true);
             storedToken.setRevoked(true);
             tokenRepository.save(storedToken);
+            user.setLogged(false);
+            userRepository.save(user);
         } else {
             throw new WrongLogoutTokenException("Wrong token or token already expired!");
         }

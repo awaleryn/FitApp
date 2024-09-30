@@ -8,6 +8,8 @@ import com.waleryn.fitapp.jwt.JwtService;
 import com.waleryn.fitapp.token.Token;
 import com.waleryn.fitapp.token.TokenRepository;
 import com.waleryn.fitapp.token.TokenType;
+import com.waleryn.fitapp.user.UserDto;
+import com.waleryn.fitapp.user.UserMapper;
 import com.waleryn.fitapp.user.UserRepository;
 import com.waleryn.fitapp.utils.Role;
 import com.waleryn.fitapp.user.User;
@@ -38,8 +40,9 @@ public class AuthenticationService {
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
+    private final UserMapper userMapper;
 
-    public AuthenticationResponse register(RegisterRequest request) {
+    public UserDto register(RegisterRequest request) {
 
         Optional<User> optionalUser = userRepository.findByEmail(request.getEmail());
         if (optionalUser.isPresent()) {
@@ -53,17 +56,9 @@ public class AuthenticationService {
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(Role.USER)
                 .build();
-        var savedUser = userRepository.save(user);
-        logger.info("User " + user.getUsername() + " has been registered");
 
-        var jwtToken = jwtService.generateToken(user);
-        var refreshToken = jwtService.generateRefreshToken(user);
-        saveUserToken(savedUser, jwtToken);
-
-        return AuthenticationResponse.builder()
-                .accessToken(jwtToken)
-                .refreshToken(refreshToken)
-                .build();
+        userRepository.save(user);
+        return userMapper.toDto(user);
     }
 
     public AuthenticationResponse login(LoginRequest request) {
@@ -72,7 +67,7 @@ public class AuthenticationService {
         var user = optionalUser.orElseThrow(
                 () -> new UserDoesNotExistException("User with this login doesn't exist!"));
 
-        if (hasUserAnyValidTokens(user)) {
+        if (user.isLogged()) {
             throw new UserAlreadyLoggedException("User already logged in!");
         }
 
@@ -82,8 +77,8 @@ public class AuthenticationService {
 
         var jwtToken = jwtService.generateToken(user);
         var refreshToken = jwtService.generateRefreshToken(user);
+        user.setLogged(true);
         saveUserToken(user, jwtToken);
-
         return AuthenticationResponse.builder()
                 .accessToken(jwtToken)
                 .refreshToken(refreshToken)
@@ -106,6 +101,7 @@ public class AuthenticationService {
         var refreshToken = jwtService.generateRefreshToken(user);
         revokeAllUserTokens(user);
         logger.info("All previous tokens for user: " + user.getUsername() + " got expired and revoked");
+        user.setLogged(true);
         saveUserToken(user, jwtToken);
         logger.info("New token has been generated for user " + user.getUsername());
         return AuthenticationResponse.builder()
