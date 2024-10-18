@@ -47,7 +47,7 @@ public class DailyIntakeController {
         User user = userRepository.findByEmail(principal.getName())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        return dailyIntakeService.getDailyIntakeHistory(user);///api/intake/history/2024-08-27.
+        return dailyIntakeService.getDailyIntakeHistory(user);
     }
 
     @GetMapping("/history/{date}")

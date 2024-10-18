@@ -3,14 +3,11 @@ package com.waleryn.fitapp.intake;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
-import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 
 @Mapper
 public interface DailyIntakeMapper {
-
-    DailyIntakeMapper INSTANCE = Mappers.getMapper(DailyIntakeMapper.class);
 
     @Mappings({
             @Mapping(target = "caloriesToday", expression = "java(calculateDaily(dailyIntake.getTotalCalories(), dailyIntake.getUser().getDailyCaloricNeeds()))"),
